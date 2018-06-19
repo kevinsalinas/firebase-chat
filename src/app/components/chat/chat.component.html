@@ -1,5 +1,5 @@
 <!-- navbar -->
-<nav class="navbar navbar-dark navbar--background">
+<!--nav class="navbar navbar-dark navbar--background">
   <span class="navbar-brand mb-0 h1">Chat</span>
 </nav>
 
@@ -8,4 +8,10 @@
         placeholder="Mensaje"
         [(ngModel)]="mensaje"
         (keyup.enter)="send()"
-        name="mensaje">
+        name="mensaje"-->
+
+  <ul>
+    <li class="text" *ngFor="let item of items | async">
+      {{item.mensaje}}
+    </li>
+  </ul>
