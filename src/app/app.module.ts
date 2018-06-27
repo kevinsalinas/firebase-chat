@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+import { APP_ROUTING } from './app-routing.module';
 import { FormsModule } from "@angular/forms";
 
 import { AppComponent } from './app.component';
@@ -16,15 +16,19 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 // Environment
 import { environment } from '../environments/environment';
 import { ChatComponent } from './components/chat/chat.component';
+import { LoginComponent } from './components/login/login.component';
+import { ChatsComponent } from './components/chats/chats.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChatComponent
+    ChatComponent,
+    LoginComponent,
+    ChatsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    APP_ROUTING,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireDatabaseModule,

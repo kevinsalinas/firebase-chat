@@ -28,12 +28,10 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.css"
+              "node_modules/materialize-css/dist/css/materialize.css"
             ],
-            "scripts": [
-            "node_modules/bootstrap/dist/js/bootstrap.js",
-            "node_modules/jquery/dist/jquery.js",
-            "node_modules/popper.js/dist/popper.min.js"
+            "scripts": [  
+              "node_modules/materialize-css/dist/js/materialize.js"
             ]
           },
           "configurations": {
@@ -82,12 +80,10 @@
             "karmaConfig": "src/karma.conf.js",
             "styles": [
               "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.css"
+              "node_modules/materialize-css/dist/css/materialize.css"
             ],
-            "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.js",
-              "node_modules/jquery/dist/jquery.js",
-              "node_modules/popper.js/dist/popper.min.js"
+            "scripts": [  
+              "node_modules/materialize-css/dist/js/materialize.js"
             ],
             "assets": [
               "src/favicon.ico",
