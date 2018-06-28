@@ -14,11 +14,7 @@ export class ChatsComponent implements OnInit {
   constructor() {
     setTimeout(() => {
       var el = document.querySelector(".tabs");
-      var instance = M.Tabs.init(el,{
-        onShow	: function(){
-          console.log("tabs2");
-        }
-      });
+      var instance = M.Tabs.init(el);
     }, 100);
   }
 
