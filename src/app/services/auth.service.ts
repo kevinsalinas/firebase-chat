@@ -31,7 +31,7 @@ export class AuthService {
         this.user.image = user.photoURL;
 
         this.itemDoc = _db.collection('users');
-        this.itemDoc.doc(String(user.uid)).update(this.user);
+        this.itemDoc.doc(String(user.uid)).set(this.user,{merge:true});
 
         // console.log(this.user);
       }

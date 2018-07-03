@@ -1,5 +1,74 @@
-<ul>
-  <li class="text" *ngFor="let item of items | async">
-    {{item.mensaje}}
-  </li>
-</ul>
+<nav class="nav-extended animated fadeIn purple darken-3">
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo">Chat</a>
+  </div>
+</nav>
+
+<div class="content">
+  
+  <div class="message own">
+    <div class="badge purple darken-4 white-text">
+      <span>hvasbcxkjavsjchvabsdcb askjd jsd j edsj efvc qe rvd e rfsdv e fsdx</span>
+    </div>
+    <div class="info">kevin salinas</div>
+  </div>
+  <div class="message">
+    <div class="badge white-text">
+      <span>hvasbcxkjavsjchvabsdcb askjd jsd j edsj efvc qe rvd e rfsdv e fsdx</span>
+    </div>
+    <div class="info">kevin salinas</div>
+  </div>
+  <div class="message own">
+    <div class="badge purple darken-4 white-text">
+      <span>hvasbcxkjavsjchvabsdcb askjd jsd j edsj efvc qe rvd e rfsdv e fsdx</span>
+    </div>
+    <div class="info">kevin salinas</div>
+  </div>
+  <div class="message">
+    <div class="badge white-text">
+      <span>hvasbcxkjavsjchvabsdcb askjd jsd j edsj efvc qe rvd e rfsdv e fsdx</span>
+    </div>
+    <div class="info">kevin salinas</div>
+  </div>
+  <div class="message">
+    <div class="badge white-text">
+      <span>hvasbcxkjavsjchvabsdcb askjd jsd j edsj efvc qe rvd e rfsdv e fsdx</span>
+    </div>
+    <div class="info">kevin salinas</div>
+  </div>
+  <div class="message">
+    <div class="badge white-text">
+      <span>hvasbcxkjavsjchvabsdcb askjd jsd j edsj efvc qe rvd e rfsdv e fsdx</span>
+    </div>
+    <div class="info">kevin salinas</div>
+  </div>
+  <div class="message">
+    <div class="badge white-text">
+      <span>hvasbcxkjavsjchvabsdcb askjd jsd j edsj efvc qe rvd e rfsdv e fsdx</span>
+    </div>
+    <div class="info">kevin salinas</div>
+  </div>
+  <div class="message">
+    <div class="badge white-text">
+      <span>hvasbcxkjavsjchvabsdcb askjd jsd j edsj efvc qe rvd e rfsdv e fsdx</span>
+    </div>
+    <div class="info">kevin salinas</div>
+  </div>
+  <div class="message own">
+    <div class="badge purple darken-4 white-text">
+      <span>hvasbcxkjavsjchvabsdcb askjd jsd j edsj efvc qe rvd e rfsdv e fsdx</span>
+    </div>
+    <div class="info">kevin salinas</div>
+  </div>
+  <div class="message own">
+    <div class="badge purple darken-4 white-text">
+      <span>hvasbcxkjavsjchvabsdcb askjd jsd j edsj efvc qe rvd e rfsdv e fsdx</span>
+    </div>
+    <div class="info">kevin salinas</div>
+  </div>
+  
+</div>
+
+<div class="input">
+  <input type="text" placeholder="Envia un mensaje" #text (keyup.enter)="send(text.value)">
+</div>

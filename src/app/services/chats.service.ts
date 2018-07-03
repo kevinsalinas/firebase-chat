@@ -14,6 +14,7 @@ export class ChatsService {
   private itemsCollection: AngularFirestoreCollection;
   users: Observable<any[]>;
   chats: Observable<Object>;
+  contacts: Observable<{}>;
 
   constructor(private afs: AngularFirestore) {
     this.itemsCollection = afs.collection<any>('users');
@@ -43,23 +44,78 @@ export class ChatsService {
   }
 
   newChat(loggedUser:User,contactUser:User) {
-    console.log(contactUser.uid);
-    let contacts:string[] = [];
-    const userDocument = this.afs.collection<any>('users/'+loggedUser.uid+'/contactos');
-    userDocument.valueChanges().subscribe(data=>{
-      for(let d in data[0]){
-        contacts.push(d);
-      }
-      if (contacts.indexOf(contactUser.uid) > -1) {
-        // TODO: regresar true == el usuario ya tiene una conversacion con el contactUser
-      }else{
-        let c = contactUser.uid.toString();
-        this.afs.collection<any>('users/'+loggedUser.uid+'/contactos').doc('userContacts').set({[c]:true},{merge:true});
-        // TODO: crear la estructura del chat y guardarlo en la coleccion de chats
-        this.afs.collection('chats').add({[c]:true});
-        // TODO: COn el ID del chat agregarlo al objecto chats del usuario
-      }
-    })
+
   }
+
+  createChat = function( loggedUser:User, contactUser:User){
+    return new Promise( (resolve,reject) => {
+      // console.log(contactUser.uid);
+      let contacts:string[] = [];
+      let chatid;
+      const userDocument = this.afs.collection('users/'+loggedUser.uid+'/contactos');
+      userDocument.valueChanges().subscribe(data=>{
+        // console.log("valuechanges");
+        for(let d in data[0]){
+          contacts.push(d);
+        }
+        if (contacts.indexOf(contactUser.uid) === -1) {
+          // console.log("if");
+          this.afs.collection('users/'+loggedUser.uid+'/contactos').doc('userContacts').set({[contactUser.uid]:true},{merge:true}).then(contactUserRegistered => {
+            let chat = {
+              partacipants: {
+                [loggedUser.uid]:true,
+                [contactUser.uid]:true
+              }
+            };
+            this.afs.collection('chats').add(chat).then( chatId => {
+              chatid = chatId['id'];
+              let chats = {
+                chats: {
+                  [chatId['id']]:true
+                }
+              };
+              this.afs.doc('users/'+loggedUser.uid).set(chats,{merge:true}).then( registered => {
+                
+                // console.log("algo");
+                // console.log(chatId['id']);
+                resolve(chatId['id']);
+  
+              }).catch(err => {
+                console.log("No se pudo registrar el chatId en mi lista de chats");
+                reject(err);
+              });
+            }).catch( err => {
+              console.log("error al crear el chat en la coleccion de chats");
+              reject(err);
+            });
+          }).catch( err => {
+            console.log("Error registrando el contacto en la lista de contactos");
+            reject(err);
+          });
+        }else{
+          // el usuario ya esta en la lista de contactos del usuario logueado.
+          // console.log("else");
+          // console.log("chatid");
+          // console.log(chatid);
+          if (chatid != undefined) {
+            resolve(chatid);
+          }
+        }
+      })
+    });
+  }
+
+  // getContacts(userId){
+  //   this.contacts = this.afs.collection('users/'+userId+'/contactos').doc('userContacts').valueChanges();
+  //   return this.contacts;
+  // }
+
+  // getContactsDetail(contacts:string[]){
+  //   let contactss:Observable<any>[] = [];
+  //   contacts.forEach(element => {
+  //     contactss.push(this.afs.doc('users/'+element).valueChanges());
+  //   });
+  //   return contactss;
+  // }
 
 }

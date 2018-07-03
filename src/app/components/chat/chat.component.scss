@@ -1,3 +1,54 @@
 .navbar--background{
     background: #673ab7;
 }
+
+.nav-extended{
+    height: 8vh;
+    width: 100vw;
+    background: red;
+}
+
+.content{
+    height: 84vh;
+    width: 100vw;
+    background-image: url('../../../assets/img/bg.jpg');
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-size: cover;
+    padding: 5px;
+    overflow: scroll;
+}
+
+.input{
+    height: 8vh;
+    width: 100vw;
+    padding: 5px;
+}
+
+.message{
+    max-width: 70%;
+    padding: 3px;
+}
+
+.own{
+    margin: 10px 10px 10px auto;
+    text-align: right;
+}
+
+.badge{
+    border-radius: 3px;
+    padding: 7px;
+    border-color: white;
+    border: 1px solid white;
+    line-height: 1.3;
+}
+
+.badge > span{
+    font-size: .9em;
+    font-weight: 300;
+}
+
+.info{
+    font-size: .8em;
+    color: white;
+}

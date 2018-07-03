@@ -18,8 +18,8 @@ export class ChatComponent implements OnInit {
   ngOnInit() {
   }
 
-  send(){
-    console.log(this.items);
+  send(val){
+    console.log(val);
   }
 
 }
