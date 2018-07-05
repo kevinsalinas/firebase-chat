@@ -22,7 +22,7 @@ export class ChatsComponent implements OnInit {
   misChats:string[] = [];
   user:any = {};
   misContactos:Observable<any[]>[] = [];
-  contactsArray:any[] = [];
+  contactsArray:User[] = [];
 
   constructor(private _chatsService:ChatsService, private _as:AuthService, private r:Router) {
     this._as.afAuth.authState.subscribe(user =>{
@@ -55,6 +55,10 @@ export class ChatsComponent implements OnInit {
     console.log("oninit");
   }
 
+  logOut(){
+    this._as.logout();
+  }
+
   newChat (user:User){
     let result:any;
     this._chatsService.createChat(this.user,user).then( chatid => {
@@ -69,17 +73,22 @@ export class ChatsComponent implements OnInit {
     // });
   }
 
-  // getChats(){
-  //   this._chatsService.getContacts(this.user.uid).subscribe( contacts => {
-  //     console.log(contacts);
-  //     var arr = Object.keys(contacts);
-  //     this.misContactos = this._chatsService.getContactsDetail(arr);
-  //     console.log(this.misContactos);
-  //     for( let mc of this.misContactos){
-  //       mc.subscribe(data => {
-  //       })
-  //     }
-  //   });
-  // }
+  getChats(){
+    this._chatsService.getContacts(this.user.uid).subscribe( contacts => {
+      console.log(contacts);
+      var keysArray = Object.keys(contacts);
+      this.misContactos = this._chatsService.getContactsDetail(keysArray);
+      this.contactsArray = [];
+      for( let c of this.misContactos){
+        c.subscribe(data => {
+          let user:User = {
+            nombre: data["nombre"],
+            image: data["image"]
+          }
+          this.contactsArray.push(user);
+        })
+      }
+    });
+  }
 
 }

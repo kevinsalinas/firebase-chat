@@ -105,17 +105,44 @@ export class ChatsService {
     });
   }
 
-  // getContacts(userId){
-  //   this.contacts = this.afs.collection('users/'+userId+'/contactos').doc('userContacts').valueChanges();
-  //   return this.contacts;
-  // }
+  getContacts(userId){
+    this.contacts = this.afs.collection('users/'+userId+'/contactos').doc('userContacts').valueChanges();
+    return this.contacts;
+  }
 
-  // getContactsDetail(contacts:string[]){
-  //   let contactss:Observable<any>[] = [];
-  //   contacts.forEach(element => {
-  //     contactss.push(this.afs.doc('users/'+element).valueChanges());
-  //   });
-  //   return contactss;
-  // }
+  getContactsDetail(contacts:string[]){
+    let contactss:Observable<any>[] = [];
+    contacts.forEach(element => {
+      contactss.push(this.afs.doc('users/'+element).valueChanges());
+    });
+    console.log(contactss);
+    return contactss;
+  }
+
+  getChat(chatid:string){
+    // TODO: doc messages regrese el documento orrdenado por timestamp
+    return this.afs.collection('chats/'+chatid+'/messages').valueChanges();
+  }
+
+  addMessage(message:string,user:any,chatid:string){
+    let message2 = {
+      message: message,
+      id_sender:user.uid,
+      id_receiver: "fyguhijo",
+      // id_receiver: function(){
+      //   if(){
+      //     return
+      //   }else{
+      //     return "szrdxtcfygvubhlijnokm"
+      //   }
+      //}
+      
+      // TODO: inicializar o crear el tiemstamp
+      timestamp: "erdtcfgjvyhbjn"
+    }
+    this.afs.collection('chats/'+chatid+'/messages').add(message2).then( data => {
+      console.log(data);
+    }).catch( err => console.log(err));
+  }
 
 }

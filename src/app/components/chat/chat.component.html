@@ -5,8 +5,14 @@
 </nav>
 
 <div class="content">
+  <div class="message" *ngFor="let m of messageArray" [ngClass]="{'own': m.id_sender === user.uid }">
+    <div class="badge white-text" [ngClass]="{'purple darken-4': m.id_sender === user.uid}">
+      <span>{{ m.message }}</span>
+    </div>
+    <div class="info">{{ m.id_sender }}</div>
+  </div>
   
-  <div class="message own">
+  <!-- <div class="message own">
     <div class="badge purple darken-4 white-text">
       <span>hvasbcxkjavsjchvabsdcb askjd jsd j edsj efvc qe rvd e rfsdv e fsdx</span>
     </div>
@@ -65,7 +71,7 @@
       <span>hvasbcxkjavsjchvabsdcb askjd jsd j edsj efvc qe rvd e rfsdv e fsdx</span>
     </div>
     <div class="info">kevin salinas</div>
-  </div>
+  </div> -->
   
 </div>
 
