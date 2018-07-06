@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { User } from "../interfaces/user.interface";
+import { AngularFireDatabase } from 'angularfire2/database';
+import { firestore } from "firebase";
 
 @Injectable({
   providedIn: 'root'
@@ -120,25 +122,17 @@ export class ChatsService {
   }
 
   getChat(chatid:string){
-    // TODO: doc messages regrese el documento orrdenado por timestamp
-    return this.afs.collection('chats/'+chatid+'/messages').valueChanges();
+    return this.afs.collection('chats/'+chatid+'/messages', ref => ref.orderBy('timestamp')).valueChanges();
   }
 
   addMessage(message:string,user:any,chatid:string){
+    const time = firestore.FieldValue.serverTimestamp();
+    console.log(time);
     let message2 = {
       message: message,
       id_sender:user.uid,
       id_receiver: "fyguhijo",
-      // id_receiver: function(){
-      //   if(){
-      //     return
-      //   }else{
-      //     return "szrdxtcfygvubhlijnokm"
-      //   }
-      //}
-      
-      // TODO: inicializar o crear el tiemstamp
-      timestamp: "erdtcfgjvyhbjn"
+      timestamp: time
     }
     this.afs.collection('chats/'+chatid+'/messages').add(message2).then( data => {
       console.log(data);

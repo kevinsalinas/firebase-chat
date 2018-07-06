@@ -36,8 +36,12 @@ export class ChatComponent implements OnInit {
   }
 
   send(val){
-    console.log(val);
-    this._chatService.addMessage(val,this.user,this.chatid);
+    if (val !== '') {
+      this._chatService.addMessage(val,this.user,this.chatid);
+      (<HTMLInputElement>document.getElementById('input-text')).value = '';
+    }
+    
+    
   }
 
 }
